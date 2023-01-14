@@ -12,10 +12,6 @@
 #include "Headers/criterios.h"
 
 int main(){
-    #ifdef _WIN32
-        system("color 80");
-    #endif
-
     srand(time(NULL));
     int x, qtd, i;
 
