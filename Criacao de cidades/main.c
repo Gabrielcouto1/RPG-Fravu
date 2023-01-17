@@ -7,7 +7,7 @@
 
 int main(){
     srand(time(NULL));
-    int  qtd_cidades, op;
+    int  op;
 
     while(1){
         printf("\n----------------- Menu----------------- \n");
@@ -20,19 +20,11 @@ int main(){
             pause();
             return 1;
         }
-        getchar();
+        pause();
 
         switch(op){
             case 1:
-                printf("\nQuantas cidades deseja gerar?: ");
-                scanf("%d",&qtd_cidades);
-                if(qtd_cidades<=0){
-                    printf("Insira valores positivos maiores que 0.\n");
-                    break;
-                }
-                getchar();
-                pause();
-                geraCidadeRandom(qtd_cidades);
+                geraCidadeRandom();
                 break;
 
             case 2:
@@ -40,7 +32,7 @@ int main(){
                 break;
 
             default:
-                printf("\nInsira opcoes validas de 1 a 3.\n");
+                printf("\nInsira opcoes validas.\n");
                 break;
         }
     }

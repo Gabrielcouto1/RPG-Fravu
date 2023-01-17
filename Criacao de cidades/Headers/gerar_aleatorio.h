@@ -13,7 +13,7 @@ void getFonteEconomia(int d4);
 void getCaracteristicaCidade(int d12);
 void getGuildas();
 void getTaverna(int qtd, int d4, int d20);
-void geraCidadeRandom(int qtd_cidades);
+void geraCidadeRandom();
 void pause();
 
 #endif

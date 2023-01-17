@@ -236,9 +236,17 @@ void getTaverna(int qtd, int d4, int d20){
     printf("---------------------------------------------------------\n");
 }
 
-void geraCidadeRandom(int qtd_cidades){
-    int i, qtd_taverna;
+void geraCidadeRandom(){
+    int i, qtd_taverna, qtd_cidades;
 
+    printf("\nQuantas cidades deseja gerar?: ");
+    scanf("%d",&qtd_cidades);
+    if(qtd_cidades<=0){
+        printf("Insira valores positivos maiores que 0.\n");
+        return;
+    }
+    end();
+    
     for(i=0;i<qtd_cidades;i++){
         printf("Vila %d\n",i+1);
         printf("---------------------------------------------------------\n");
