@@ -4,6 +4,7 @@
 #include "Headers/dados.h"
 #include "Headers/gerar_aleatorio.h"
 #include "Headers/gerar_dados_inseridos.h"
+#include "Headers/funcoes_gerais.h"
 
 int main(){
     srand(time(NULL));

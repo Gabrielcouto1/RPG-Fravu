@@ -1,20 +1,15 @@
 #ifndef GERAR_ALEATORIO_H
 #define GERAR_ALEATORIO_H
 
-#ifdef _WIN32
-    #define clean "cls"
-    
-#elif __linux__
-    #define clean "clear"
-#endif
-
-*int qtdEstruturas(int tamanho_cidade);
-void getTamanhoVila(int qtd_estruturas*);
+void getTamanhoVila(int d4, int *qtd_estruturas);
 void getFonteEconomia(int d4);
 void getCaracteristicaCidade(int d12);
 void getGuildas();
-void getTaverna(int qtd, int d4, int d20);
+void getTaverna(int qtd);
+void getNomeTaverna();
+void getIgreja(int qtd);
+void getLoja(int qtd);
+void getBiblioteca(int qtd, int tamanho_cidade);
 void geraCidadeRandom();
-void pause();
 
 #endif

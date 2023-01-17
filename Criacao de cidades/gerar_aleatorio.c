@@ -2,56 +2,9 @@
 #include <stdlib.h>
 #include "Headers/gerar_aleatorio.h"
 #include "Headers/dados.h"
+#include "Headers/funcoes_gerais.h"
 
-*int qtdEstruturas(int tamanho_cidade){
-    int qtd_estruturas[5];
-    //qtd_estruturas[0]=taverna
-    //qtd_estruturas[1]=igreja
-    //qtd_estruturas[2]=biblioteca
-    //qtd_estruturas[3]=loja magica
-    //qtd_estruturas[4]=ferreiro
-
-    switch(tamanho_cidade){
-        case 1:
-            qtd_estruturas[0]=rand()%2;
-            qtd_estruturas[1]=0;
-            qtd_estruturas[2]=rand()%2;
-            qtd_estruturas[3]=0;
-            qtd_estruturas[4]=rand()%2;
-            break;
-
-        case 2:
-            qtd_estruturas[0]=1;
-            qtd_estruturas[1]=1;
-            qtd_estruturas[2]=(rand()%2)+1;
-            qtd_estruturas[3]=rand()%2;
-            qtd_estruturas[4]=1;
-            break;
-
-        case 3:
-            qtd_estruturas[0]=rollD3();
-            qtd_estruturas[1]=rollD3();
-            qtd_estruturas[2]=rollD3();
-            qtd_estruturas[3]=rollD3();
-            qtd_estruturas[4]=rollD3();
-            break;
-        
-        case 4: 
-            qtd_estruturas[0]=rand()%3+2;
-            qtd_estruturas[1]=rand()%4+2;
-            qtd_estruturas[2]=rand()%3+2;
-            qtd_estruturas[3]=rand()%2+2;
-            qtd_estruturas[4]=3;
-            break;
-    }
-
-    return qtd_estruturas;
-}
-
-void getTamanhoVila(){
-    int qtd_estruturas[5], d4=rollD4();
-    qtd_estruturas=qtdEstruturas(d4);
-
+void getTamanhoVila(int d4, int *qtd_estruturas){
     printf("Tamanho da vila: ");
     switch(d4){
         case 1:
@@ -72,14 +25,14 @@ void getTamanhoVila(){
     }
     printf("Tavernas: %d\n",qtd_estruturas[0]);
     printf("Igrejas: %d\n",qtd_estruturas[1]);
-    printf("Bibliotecas: %d",qtd_estruturas[2]);
-    printf("Itens magicos: %d\n",qtd_estruturas[3]);
+    printf("Bibliotecas: %d\n",qtd_estruturas[2]);
+    printf("Lojas: %d\n",qtd_estruturas[3]);
     printf("Ferreiros: %d\n",qtd_estruturas[4] );
     printf("---------------------------------------------------------\n");
 }
 
 void getFonteEconomia(int d4){
-    printf("\n\nFonte de economia: ");
+    printf("\nFonte de economia: ");
     switch(d4){
         case 1:
             printf("Fazendas.\n");
@@ -98,7 +51,7 @@ void getFonteEconomia(int d4){
 }
 
 void getCaracteristicaCidade(int d12){
-    printf("\n\nCaracteristicas da cidade: \n");
+    printf("\nCaracteristicas da cidade: ");
 
     switch(d12){
         case 1:
@@ -149,7 +102,7 @@ void getGuildas(){
         return;
     
     for(i=0;i<qtd;i++){
-        printf("\n\nGuilda numero %d\n",i+1);
+        printf("\nGuilda numero %d\n",i+1);
         printf("Guilda de ");
 
         switch(rollD20()){
@@ -191,15 +144,16 @@ void getGuildas(){
                 break;
         }
     }
-    printf("---------------------------------------------------------\n");
 }
 
-void getTaverna(int qtd, int d4, int d20){
+void getTaverna(int qtd){
     int i;
     for(i=0;i<qtd;i++){
-        printf("\n\nTaverna numero %d\n", i+1);
+        printf("\nTaverna numero %d\n", i+1);
+        printf("Nome: ");
+        getNomeTaverna();
         printf("Tamanho: ");
-        switch(d4){
+        switch(rollD4()){
             case 1:
                 printf("Minuscula.\t");
                 break;
@@ -215,7 +169,7 @@ void getTaverna(int qtd, int d4, int d20){
         }
         printf("\nCaracteristica: ");
 
-        switch(d20){
+        switch(rollD20()){
             case 1:
             case 2:
             case 3:
@@ -257,8 +211,242 @@ void getTaverna(int qtd, int d4, int d20){
     printf("---------------------------------------------------------\n");
 }
 
+void getNomeTaverna(){
+    switch(rollD12()){
+        case 1:
+            printf("A Enguia ");
+            break;
+        case 2:
+            printf("O Golfinho ");
+            break;
+        case 3:
+            printf("O Anao ");
+            break;
+        case 4:
+            printf("O Ponei ");
+            break;
+        case 5:
+            printf("O Lobo ");
+            break;
+        case 6:
+            printf("O Espirito ");
+            break;
+        case 7:
+            printf("O Cordeiro ");
+            break;
+        case 8:
+            printf("A Montanha ");
+            break;
+        case 9:
+            printf("O Satiro ");
+            break;
+        case 10:
+            printf("A Aranha ");
+            break;
+        case 11:
+            printf("A Estrela ");
+            break;
+        case 12:
+            printf("O Jovem ");
+            break;
+    }
+
+    switch(rollD12()){
+        case 1:
+            printf("Prateado(a)\n");
+            break;
+        case 2:
+            printf("Dourado(a)\n");
+            break;
+        case 3:
+            printf("Sorridente\n");
+            break;
+        case 4:
+            printf("Atraente\n");
+            break;
+        case 5:
+            printf("Solitario(a)\n");
+            break;
+        case 6:
+            printf("Bebado(a)\n");
+            break;
+        case 7:
+            printf("Errante\n");
+            break;
+        case 8:
+            printf("Misterioso(a)\n");
+            break;
+        case 9:
+            printf("Negro(a)\n");
+            break;
+        case 10:
+            printf("Reluzente\n");
+            break;
+        case 11:
+            printf("Cambaleante\n");
+            break;
+        case 12:
+            printf("Empinado(a)\n");
+            break;
+    }
+}
+
+void getIgreja(int qtd){
+    int i;
+
+    for(i=0;i<qtd;i++){
+        printf("\nIgreja numero %d: ",i+1);
+        printf("\nTamanho: ");
+
+        switch(rollD4()){
+        case 1:
+            printf("Minuscula\n");
+            break;
+        case 2:
+            printf("Pequena\n");
+            break;
+        case 3:
+            printf("Media\n");
+            break;
+        case 4:
+            printf("Grande\n");
+            break;
+        }
+
+        printf("Tipo: ");
+        switch(rollD20()){
+            case 1:
+            case 2:
+            case 3:
+            case 4:
+            case 5:
+            case 6:
+            case 7:
+            case 8:
+            case 9:
+            case 10:
+                printf("Templo Neutro ou bom.\n");
+                break;
+            case 11:
+            case 12:
+                printf("Templo de charlatoes.\n");
+                break;
+            case 13:
+            case 14:
+                printf("Santuario abandonado.\n");
+                break;
+            case 15:
+                
+            case 16:
+            case 17:
+                printf("Biblioteca dedicada a estudos religiosos.\n");
+                break;
+            case 18:
+            case 19:
+                printf("Divindade antiga ou esquecida.\n");
+                break;
+            case 20:
+                printf("Santuario escondido dedicado a um corruptor ou divindade maligna.\n");
+                break;
+        }
+    }
+    printf("---------------------------------------------------------\n");
+}
+
+void getLoja(int qtd){
+    int i;
+
+    for(i=0;i<qtd;i++){
+        printf("\nLoja numero %d: ",i+1);
+        printf("\nTamanho: ");
+        switch(rollD4()){
+            case 1:
+                printf("Minuscula.\nChance de itens: (incomum 20%%)\n");
+                break;
+            case 2:
+                printf("Pequena.\nChance de itens: (incomum 60%%, raro 20%%)\n");
+                break;
+            case 3:
+                printf("Media.\nChance de itens: (incomum 80%%, raro 60%%, muito raro 20%%)\n");
+                break;
+            case 4:
+                printf("Grande.\nChance de itens: (raro 80%%, muito raro 60%%)\n");
+                break;
+        }
+        
+        printf("Tipo de loja: ");
+        switch(rollD6()){
+            case 1:
+                printf("Pocoes e venenos.\n");
+                break;
+            case 2:
+                printf("Equipamentos.\n");
+                break;
+            case 3:
+                printf("Focos arcanos e pergaminhos.\n");
+                break;
+            case 4:
+                printf("Armas e escudos.\n");
+                break;
+            case 5:
+                printf("Itens Maravilhosos.\n");
+                break;
+            case 6:
+                printf("Qualquer outro tipo de item mas muito barato. (Comumente amaldicoado)\n");
+                break;
+        }
+    }
+}
+
+void getBiblioteca(int qtd, int tamanho_cidade){
+    int i;
+    int d100;
+    for(i=0;i<qtd;i++){
+        d100=rollD100();
+        printf("\nBiblioteca de numero %d\n", i+1);
+        printf("Tamanho: ");
+        switch(tamanho_cidade){
+            case 1:
+                printf("Media.\nModificador: 0\n");
+                break;
+            case 2:
+                if(d100>=1&&d100<=75)
+                    printf("Pequena.\nModificador: -5\n");
+                else if(d100>75&&d100<=89)
+                    printf("Media.\nModificador: 0\n");
+                else if(d100>89&&d100<=95)
+                    printf("Grande.\nModificador: +2\n");
+                else if(d100>95&&d100<=100)
+                    printf("Colossal.\nModificador: +5\n");
+                break;
+
+            case 3:
+                if(d100>=1&&d100<=50)
+                    printf("Pequena.\nModificador: -5\n");
+                else if(d100>50&&d100<=75)
+                    printf("Media.\nModificador: 0\n");
+                else if(d100>75&&d100<=90)
+                    printf("Grande.\nModificador: +2\n");
+                else if(d100>90&&d100<=100)
+                    printf("Colossal.\nModificador: +5\n");
+                break;
+
+            case 4:
+                if(d100>=1&&d100<=25)
+                    printf("Pequena.\nModificador: -5\n");
+                else if(d100>25&&d100<=20)
+                    printf("Media.\nModificador: 0\n");
+                else if(d100>20&&d100<=80)
+                    printf("Grande.\nModificador: +2\n");
+                else if(d100>80&&d100<=100)
+                    printf("Colossal.\nModificador: +5\n");
+                break;
+        }
+    }
+}
+
 void geraCidadeRandom(){
-    int i, qtd_taverna, qtd_cidades;
+    int i, qtd_taverna, qtd_cidades, *qtd_estruturas, d4, qtd_igrejas, qtd_bibliotecas, qtd_lojas;
 
     printf("\nQuantas cidades deseja gerar?: ");
     scanf("%d",&qtd_cidades);
@@ -266,23 +454,29 @@ void geraCidadeRandom(){
         printf("Insira valores positivos maiores que 0.\n");
         return;
     }
-    end();
+    pause();
     
     for(i=0;i<qtd_cidades;i++){
         printf("Vila %d\n",i+1);
         printf("---------------------------------------------------------\n");
-        qtd_taverna=getTamanhoVila(rollD4());
+        d4=rollD4();
+
+        qtd_estruturas=qtdEstruturas(d4);
+        qtd_taverna=qtd_estruturas[0];
+        qtd_igrejas=qtd_estruturas[1];
+        qtd_bibliotecas=qtd_estruturas[2];
+        qtd_lojas=qtd_estruturas[3];
+
+        getTamanhoVila(d4, qtd_estruturas);
         getFonteEconomia(rollD4());
         getCaracteristicaCidade(rollD12());
         getGuildas(rollD20());
-        getTaverna(qtd_taverna, rollD4(), rollD20());
-        
+        printf("---------------------------------------------------------\n");
+        getTaverna(qtd_taverna);
+        getIgreja(qtd_igrejas);
+        getLoja(qtd_lojas);
+        printf("---------------------------------------------------------\n");
+        getBiblioteca(qtd_bibliotecas, d4);
         pause();
     }  
-}
-
-void pause(){
-    printf("\nPressione ENTER para continuar...");
-    getchar();
-    system(clean);
 }
