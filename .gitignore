@@ -1,12 +1,12 @@
 **/.vscode
 **/*.code-workspace
 **/*.gitattributes
-**/*.exe
 **/*.out
 **/*.o
 **/*.jpg
 **/*.zip
 **/*.pdf
+
 main
 /Matérias/AOC1/Aulas/Aula 2/ContasClientes/JavaApplication4/nbproject/private/
 /Matérias/AOC1/Aulas/Aula 2/Exercicios1-2/build/
