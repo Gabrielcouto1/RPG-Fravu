@@ -8,7 +8,8 @@
     #define clean "clear"
 #endif
 
-int getTamanhoVila(int d4);
+*int qtdEstruturas(int tamanho_cidade);
+void getTamanhoVila(int qtd_estruturas*);
 void getFonteEconomia(int d4);
 void getCaracteristicaCidade(int d12);
 void getGuildas();

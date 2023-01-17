@@ -3,58 +3,79 @@
 #include "Headers/gerar_aleatorio.h"
 #include "Headers/dados.h"
 
-int getTamanhoVila(int d4){
+*int qtdEstruturas(int tamanho_cidade){
+    int qtd_estruturas[5];
+    //qtd_estruturas[0]=taverna
+    //qtd_estruturas[1]=igreja
+    //qtd_estruturas[2]=biblioteca
+    //qtd_estruturas[3]=loja magica
+    //qtd_estruturas[4]=ferreiro
+
+    switch(tamanho_cidade){
+        case 1:
+            qtd_estruturas[0]=rand()%2;
+            qtd_estruturas[1]=0;
+            qtd_estruturas[2]=rand()%2;
+            qtd_estruturas[3]=0;
+            qtd_estruturas[4]=rand()%2;
+            break;
+
+        case 2:
+            qtd_estruturas[0]=1;
+            qtd_estruturas[1]=1;
+            qtd_estruturas[2]=(rand()%2)+1;
+            qtd_estruturas[3]=rand()%2;
+            qtd_estruturas[4]=1;
+            break;
+
+        case 3:
+            qtd_estruturas[0]=rollD3();
+            qtd_estruturas[1]=rollD3();
+            qtd_estruturas[2]=rollD3();
+            qtd_estruturas[3]=rollD3();
+            qtd_estruturas[4]=rollD3();
+            break;
+        
+        case 4: 
+            qtd_estruturas[0]=rand()%3+2;
+            qtd_estruturas[1]=rand()%4+2;
+            qtd_estruturas[2]=rand()%3+2;
+            qtd_estruturas[3]=rand()%2+2;
+            qtd_estruturas[4]=3;
+            break;
+    }
+
+    return qtd_estruturas;
+}
+
+void getTamanhoVila(){
+    int qtd_estruturas[5], d4=rollD4();
+    qtd_estruturas=qtdEstruturas(d4);
+
     printf("Tamanho da vila: ");
-    int qtd;
     switch(d4){
         case 1:
             printf("Abandonada (%d habitantes)\n\n", rand()%11);
-            printf("Tavernas: 0\n");
-            printf("Igrejas: 0\n");
-            printf("Itens magicos: 0\n");
-            printf("Ferreiros: 0\n");
-            qtd=0;
             break;
 
         case 2:
             printf("Pequena (%d habitantes).\n\n", rand()%(451)+50);
-            printf("Tavernas: 1\n");
-            printf("Igrejas: 1\n");
-
-            int r=rand()%2;
-            if(r==1)
-                printf("Itens magicos: 1\n");
-            else
-                printf("Itens magicos: 0\n");
-            
-            printf("Ferreiros: 1.\n");
-            qtd=1;
-
             break;
 
         case 3:
             printf("Media (%d Habitantes)\n\n", rand()%4501+500);
-            qtd=rollD3();
-            printf("Tavernas: %d\n",qtd);
-            printf("Igrejas: %d\n",rollD3());
-            printf("Itens magicos: %d\n",rollD3());
-            printf("Ferreiros: 1\n");
-
             break;
 
         case 4:
-            printf("Grande (+4000 Habitantes).\n\n");
-            qtd=rand()%3+2;
-            printf("Tavernas: %d\n",qtd);
-            printf("Igrejas: %d\n",rand()%4+2);
-            printf("Itens magicos: %d\n",rand()%2+2);
-            printf("Ferreiros: 3\n");
-
+            printf("Grande (%d Habitantes).\n\n", rand()%6001+4000);
             break;
     }
+    printf("Tavernas: %d\n",qtd_estruturas[0]);
+    printf("Igrejas: %d\n",qtd_estruturas[1]);
+    printf("Bibliotecas: %d",qtd_estruturas[2]);
+    printf("Itens magicos: %d\n",qtd_estruturas[3]);
+    printf("Ferreiros: %d\n",qtd_estruturas[4] );
     printf("---------------------------------------------------------\n");
-
-    return qtd;
 }
 
 void getFonteEconomia(int d4){
@@ -265,13 +286,3 @@ void pause(){
     getchar();
     system(clean);
 }
-
-/*
-*int qtdEstruturas(int tamanho){
-    int vet[5];
-    vet[0]=2;
-    vet[1]=3;
-
-    return vet;
-}
-*/
