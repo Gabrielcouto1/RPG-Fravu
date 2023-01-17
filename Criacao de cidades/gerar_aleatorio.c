@@ -1,12 +1,12 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "Headers/criterios.h"
+#include "Headers/gerar_aleatorio.h"
 #include "Headers/dados.h"
 
-int getTamanhoVila(){
+int getTamanhoVila(int d4){
     printf("Tamanho da vila: ");
     int qtd;
-    switch(rollD4()){
+    switch(d4){
         case 1:
             printf("Abandonada (%d habitantes)\n\n", rand()%11);
             printf("Tavernas: 0\n");
@@ -52,14 +52,14 @@ int getTamanhoVila(){
 
             break;
     }
-    printf("---------------------------------------------------------");
+    printf("---------------------------------------------------------\n");
 
     return qtd;
 }
 
-void getFonteEconomia(){
+void getFonteEconomia(int d4){
     printf("\n\nFonte de economia: ");
-    switch(rollD4()){
+    switch(d4){
         case 1:
             printf("Fazendas.\n");
             break;
@@ -73,13 +73,13 @@ void getFonteEconomia(){
             printf("Ensino.\n");
             break;  
     }
-    printf("---------------------------------------------------------");
+    printf("---------------------------------------------------------\n");
 }
 
-void getCaracteristicaCidade(){
-    printf("\n\nCaracteristicas da cidade: ");
+void getCaracteristicaCidade(int d12){
+    printf("\n\nCaracteristicas da cidade: \n");
 
-    switch(rollD12()){
+    switch(d12){
         case 1:
             printf("Templo imponente.\n");
             break;
@@ -117,7 +117,7 @@ void getCaracteristicaCidade(){
             printf("Conhecida por eventos magicos.\n");
             break;
     }
-    printf("---------------------------------------------------------");
+    printf("---------------------------------------------------------\n");
 }
 
 void getGuildas(){
@@ -170,15 +170,15 @@ void getGuildas(){
                 break;
         }
     }
-    printf("---------------------------------------------------------");
+    printf("---------------------------------------------------------\n");
 }
 
-void getTaverna(int qtd){
+void getTaverna(int qtd, int d4, int d20){
     int i;
     for(i=0;i<qtd;i++){
         printf("\n\nTaverna numero %d\n", i+1);
         printf("Tamanho: ");
-        switch(rollD4()){
+        switch(d4){
             case 1:
                 printf("Minuscula.\t");
                 break;
@@ -194,7 +194,7 @@ void getTaverna(int qtd){
         }
         printf("\nCaracteristica: ");
 
-        switch(rollD20()){
+        switch(d20){
             case 1:
             case 2:
             case 3:
@@ -233,5 +233,37 @@ void getTaverna(int qtd){
                 break;
         }
     }
-    printf("---------------------------------------------------------");
+    printf("---------------------------------------------------------\n");
 }
+
+void geraCidadeRandom(int qtd_cidades){
+    int i, qtd_taverna;
+
+    for(i=0;i<qtd_cidades;i++){
+        printf("Vila %d\n",i+1);
+        printf("---------------------------------------------------------\n");
+        qtd_taverna=getTamanhoVila(rollD4());
+        getFonteEconomia(rollD4());
+        getCaracteristicaCidade(rollD12());
+        getGuildas(rollD20());
+        getTaverna(qtd_taverna, rollD4(), rollD20());
+        
+        pause();
+    }  
+}
+
+void pause(){
+    printf("\nPressione ENTER para continuar...");
+    getchar();
+    system(clean);
+}
+
+/*
+*int qtdEstruturas(int tamanho){
+    int vet[5];
+    vet[0]=2;
+    vet[1]=3;
+
+    return vet;
+}
+*/
