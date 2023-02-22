@@ -9,7 +9,8 @@
 int main(){
     srand(time(NULL));
     int  op;
-
+    system("mkdir CidadesAleatorias");
+    system("cls");
     while(1){
         printf("\n----------------- Menu----------------- \n");
         printf("[1]Gerar cidades aleatoriamente;\n");
@@ -36,6 +37,9 @@ int main(){
                 printf("\nInsira opcoes validas.\n");
                 break;
         }
+        if(op==1||op==2)
+            system("move *.txt CidadesAleatorias");
+        system("cls");
     }
     return 1;
 }

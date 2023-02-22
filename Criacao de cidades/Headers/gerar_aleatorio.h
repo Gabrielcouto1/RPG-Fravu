@@ -1,15 +1,17 @@
 #ifndef GERAR_ALEATORIO_H
 #define GERAR_ALEATORIO_H
 
-void getTamanhoVila(int d4, int *qtd_estruturas);
-void getFonteEconomia(int d4);
-void getCaracteristicaCidade(int d12);
-void getGuildas();
-void getTaverna(int qtd);
-void getNomeTaverna();
-void getIgreja(int qtd);
-void getLoja(int qtd);
-void getBiblioteca(int qtd, int tamanho_cidade);
+char* getTamanhoVila(int d4, int *qtd_estruturas);
+char* getFonteEconomia(int d4);
+char* getCaracteristicaCidade(int d12);
+char* getGuildas();
+char* getTaverna(int qtd);
+char* getNomeTaverna();
+char* getIgreja(int qtd);
+char* getLoja(int qtd);
+char* getBiblioteca(int qtd, int tamanho_cidade);
 void geraCidadeRandom();
+void printRandom(int cont, char* tam_vila, char* economia, char* caracteristica, char* guilda, 
+char* taverna, char* igreja,char* loja, char* biblioteca);
 
 #endif

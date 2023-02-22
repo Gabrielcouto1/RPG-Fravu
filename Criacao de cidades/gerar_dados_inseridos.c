@@ -1,49 +1,56 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include "Headers/dados.h"
 #include "Headers/gerar_dados_inseridos.h"
 #include "Headers/gerar_aleatorio.h"
 #include "Headers/funcoes_gerais.h"
 
-void getGuildasDadosPre(int d20){
+char* getGuildasDadosPre(int d20){
+    char *out;
+    out=malloc(255*sizeof(char));
+    strcpy(out,"\0");
+
     switch(d20){
         case 1:
         case 2:
-            printf("Ladroes.\n");
+            strcat(out,"Ladroes.\n");
             break;
         case 3:
         case 4:
         case 5:
-            printf("Guerreiros.\n");
+            strcat(out,"Guerreiros.\n");
             break;
         case 6:
         case 7:
-            printf("Sociedade Arcana.\n");
+            strcat(out,"Sociedade Arcana.\n");
             break;
         case 8:
         case 9:
         case 10:
         case 11:
-            printf("Mercadores.\n");
+            strcat(out,"Mercadores.\n");
             break;
         case 12:
         case 13:
-            printf("Burgueses.\n");
+            strcat(out,"Burgueses.\n");
             break;
         case 14:
         case 15:
         case 16:
-            printf("Artesoes.\n");
+            strcat(out,"Artesoes.\n");
             break;
         case 17:
         case 18:
         case 19:
-            printf("Revolucionarios.\n");
+            strcat(out,"Revolucionarios.\n");
             break;
         case 20:
-            printf("Assassinos.\n");
+            strcat(out,"Assassinos.\n");
             break;
     }
+    strcat(out,"\0");
+    return out;
 }
 
 int getQtdTaverna(int d4){
@@ -70,82 +77,92 @@ int getQtdTaverna(int d4){
     return qtd;
 }
 
-void getTavernaDadosPre(int d4, int d20){
-    printf("\nTamanho: ");
+char* getTavernaDadosPre(int d4, int d20){
+    char *out;
+    out=malloc(255*sizeof(char));
+    strcpy(out,"\0");
+
+    strcat(out,"\nTamanho: ");
     switch(d4){
         case 1:
-            printf("Minuscula.\t");
+            strcat(out,"Minuscula.\t");
             break;
         case 2:
-            printf("Pequena.\t");
+            strcat(out,"Pequena.\t");
             break;
         case 3:
-            printf("Media.\t");
+            strcat(out,"Media.\t");
             break;
         case 4:
-            printf("Grande.\t");
+            strcat(out,"Grande.\t");
             break;
     }
 
-    printf("\nCaracteristica: ");
+    strcat(out,"\nCaracteristica: ");
     switch(d20){
         case 1:
         case 2:
         case 3:
         case 4:
         case 5:
-            printf("Quieta e discreta.\n");
+            strcat(out,"Quieta e discreta.\n");
             break;
         case 6:
         case 7:
         case 8:
         case 9:
         case 10:
-            printf("Barulhenta.\n");
+            strcat(out,"Barulhenta.\n");
             break;
         case 11:
         case 12:
         case 13:
         case 14:
-            printf("Frequentada por guilda.\n");
+            strcat(out,"Frequentada por guilda.\n");
             break;
         case 15:
-            printf("Local de encontro secreto.\n");
+            strcat(out,"Local de encontro secreto.\n");
             break;
         case 16:
-            printf("Bordel.\n");
+            strcat(out,"Bordel.\n");
             break;
         case 17:
         case 18:
-            printf("Local de briga.\n");
+            strcat(out,"Local de briga.\n");
             break;
         case 19:
-            printf("Local de trafico.\n");
+            strcat(out,"Local de trafico.\n");
             break;
         case 20:
-            printf("Clube gastronomico.\n");
+            strcat(out,"Clube gastronomico.\n");
             break;
     }
+    strcat(out,"\0");
+    return out;
 }
 
-void getIgrejaDadosPre(int d4, int d20){
-    printf("\nTamanho: ");
+char* getIgrejaDadosPre(int d4, int d20){
+    char *out;
+    out=malloc(255*sizeof(char));
+    strcpy(out,"\0");
+    
+    strcat(out,"\nTamanho: ");
 
     switch(d4){
     case 1:
-        printf("Minuscula\n");
+        strcat(out,"Minuscula\n");
         break;
     case 2:
-        printf("Pequena\n");
+        strcat(out,"Pequena\n");
         break;
     case 3:
-        printf("Media\n");
+        strcat(out,"Media\n");
         break;
     case 4:
-        printf("Grande\n");
+        strcat(out,"Grande\n");
         break;
     }
-    printf("Tipo: ");
+    strcat(out,"Tipo: ");
 
     switch(d20){
         case 1:
@@ -158,109 +175,123 @@ void getIgrejaDadosPre(int d4, int d20){
         case 8:
         case 9:
         case 10:
-            printf("Templo Neutro ou bom.\n");
+            strcat(out,"Templo Neutro ou bom.\n");
             break;
         case 11:
         case 12:
-            printf("Templo de charlatoes.\n");
+            strcat(out,"Templo de charlatoes.\n");
             break;
         case 13:
         case 14:
-            printf("Santuario abandonado.\n");
+            strcat(out,"Santuario abandonado.\n");
             break;
         case 15:
             
         case 16:
         case 17:
-            printf("Biblioteca dedicada a estudos religiosos.\n");
+            strcat(out,"Biblioteca dedicada a estudos religiosos.\n");
             break;
         case 18:
         case 19:
-            printf("Divindade antiga ou esquecida.\n");
+            strcat(out,"Divindade antiga ou esquecida.\n");
             break;
         case 20:
-            printf("Santuario escondido dedicado a um corruptor ou divindade maligna.\n");
+            strcat(out,"Santuario escondido dedicado a um corruptor ou divindade maligna.\n");
             break;
     }
+    strcat(out,"\0");
+    return out;
 }
 
-void getLojaDadosPre(int d4, int d6){
-    printf("\nTamanho: ");
+char* getLojaDadosPre(int d4, int d6){
+    char *out;
+    out=malloc(255*sizeof(char));
+    strcpy(out,"\0");
+
+    strcat(out,"\nTamanho: ");
     switch(d4){
         case 1:
-            printf("Minuscula.\nChance de itens: (incomum 20%%)\n");
+            strcat(out,"Minuscula.\nChance de itens: (incomum 20%)\n");
             break;
         case 2:
-            printf("Pequena.\nChance de itens: (incomum 60%%, raro 20%%)\n");
+            strcat(out,"Pequena.\nChance de itens: (incomum 60%, raro 20%)\n");
             break;
         case 3:
-            printf("Media.\nChance de itens: (incomum 80%%, raro 60%%, muito raro 20%%)\n");
+            strcat(out,"Media.\nChance de itens: (incomum 80%, raro 60%, muito raro 20%%)\n");
             break;
         case 4:
-            printf("Grande.\nChance de itens: (raro 80%%, muito raro 60%%)\n");
+            strcat(out,"Grande.\nChance de itens: (raro 80%, muito raro 60%)\n");
             break;
     }
     
-    printf("Tipo de loja: ");
+    strcat(out,"Tipo de loja: ");
     switch(d6){
         case 1:
-            printf("Pocoes e venenos.\n");
+            strcat(out,"Pocoes e venenos.\n");
             break;
         case 2:
-            printf("Equipamentos.\n");
+            strcat(out,"Equipamentos.\n");
             break;
         case 3:
-            printf("Focos arcanos e pergaminhos.\n");
+            strcat(out,"Focos arcanos e pergaminhos.\n");
             break;
         case 4:
-            printf("Armas e escudos.\n");
+            strcat(out,"Armas e escudos.\n");
             break;
         case 5:
-            printf("Itens Maravilhosos.\n");
+            strcat(out,"Itens Maravilhosos.\n");
             break;
         case 6:
-            printf("Qualquer outro tipo de item mas muito barato. (Comumente amaldicoado)\n");
+            strcat(out,"Qualquer outro tipo de item mas muito barato. (Comumente amaldicoado)\n");
             break;
     }
+    strcat(out,"\0");
+    return out;
 }
 
-void getBibliotecaDadosPre(int tamanho_cidade, int d100){
-    printf("Tamanho: ");
+char* getBibliotecaDadosPre(int tamanho_cidade, int d100){
+    char *out;
+    out=malloc(255*sizeof(char));
+    strcpy(out,"\0");
+
+    strcat(out,"Tamanho: ");
     switch(tamanho_cidade){
         case 1:
-            printf("Media.\nModificador: 0\n");
+            strcat(out,"Media.\nModificador: 0\n");
             break;
         case 2:
             if(d100>=1&&d100<=75)
-                printf("Pequena.\nModificador: -5\n");
+                strcat(out,"Pequena.\nModificador: -5\n");
             else if(d100>75&&d100<=89)
-                printf("Media.\nModificador: 0\n");
+                strcat(out,"Media.\nModificador: 0\n");
             else if(d100>89&&d100<=95)
-                printf("Grande.\nModificador: +2\n");
+                strcat(out,"Grande.\nModificador: +2\n");
             else if(d100>95&&d100<=100)
-                printf("Colossal.\nModificador: +5\n");
+                strcat(out,"Colossal.\nModificador: +5\n");
             break;
         case 3:
             if(d100>=1&&d100<=50)
-                printf("Pequena.\nModificador: -5\n");
+                strcat(out,"Pequena.\nModificador: -5\n");
             else if(d100>50&&d100<=75)
-                printf("Media.\nModificador: 0\n");
+                strcat(out,"Media.\nModificador: 0\n");
             else if(d100>75&&d100<=90)
-                printf("Grande.\nModificador: +2\n");
+                strcat(out,"Grande.\nModificador: +2\n");
             else if(d100>90&&d100<=100)
-                printf("Colossal.\nModificador: +5\n");
+                strcat(out,"Colossal.\nModificador: +5\n");
             break;
         case 4:
             if(d100>=1&&d100<=25)
-                printf("Pequena.\nModificador: -5\n");
+                strcat(out,"Pequena.\nModificador: -5\n");
             else if(d100>25&&d100<=20)
-                printf("Media.\nModificador: 0\n");
+                strcat(out,"Media.\nModificador: 0\n");
             else if(d100>20&&d100<=80)
-                printf("Grande.\nModificador: +2\n");
+                strcat(out,"Grande.\nModificador: +2\n");
             else if(d100>80&&d100<=100)
-                printf("Colossal.\nModificador: +5\n");
+                strcat(out,"Colossal.\nModificador: +5\n");
             break;
     }
+    strcat(out,"\0");
+    return out;
 }
 
 void geraCidadeDadosPre(){
@@ -416,39 +447,71 @@ void geraCidadeDadosPre(){
     }
 
     pause();
+    pause();
+    pause();
+    
+    FILE *fp;
+    fp=fopen("Cidade_Dados_Pre_Rolados.txt","w+");
 
-    getTamanhoVila(d4_tamanho_cidade, qtd_estruturas);
-    getFonteEconomia(d4_economia);
-    getCaracteristicaCidade(d12_caracteristica);
+    printf("%s",getTamanhoVila(d4_tamanho_cidade, qtd_estruturas));
+    fprintf(fp,"%s",getTamanhoVila(d4_tamanho_cidade, qtd_estruturas));
+
+    printf("%s",getFonteEconomia(d4_economia));
+    fprintf(fp,"%s",getFonteEconomia(d4_economia));
+
+    printf("%s",getCaracteristicaCidade(d12_caracteristica));
+    fprintf(fp,"%s",getCaracteristicaCidade(d12_caracteristica));
     
     for(i=0;i<qtd_guildas;i++){
         printf("\nGuilda de numero %d: Guilda de ", i+1);
-        getGuildasDadosPre(d20_guildas[i]);
+        fprintf(fp,"\nGuilda de numero %d: Guilda de ", i+1);
+
+        printf("%s",getGuildasDadosPre(d20_guildas[i]));
+        fprintf(fp,"%s",getGuildasDadosPre(d20_guildas[i]));
     }
     printf("---------------------------------------------------------\n");
+    fprintf(fp,"---------------------------------------------------------\n");
+
     for(i=0;i<qtd_taverna;i++){
         printf("\nTaverna de numero %d:", i+1);
-        getTavernaDadosPre(d4_taverna[i], d20_taverna[i]);
+        fprintf(fp,"\nTaverna de numero %d:", i+1);
+
+        printf("%s",getTavernaDadosPre(d4_taverna[i], d20_taverna[i]));
+        fprintf(fp,"%s",getTavernaDadosPre(d4_taverna[i], d20_taverna[i]));
     }
     printf("---------------------------------------------------------\n");
-    
+    fprintf(fp,"---------------------------------------------------------\n");
+
     for(i=0;i<qtd_igrejas;i++){
         printf("\nIgreja de numero %d:", i+1);
-        getIgrejaDadosPre(d4_igreja[i],d20_igreja[i]);
+        fprintf(fp,"\nIgreja de numero %d:", i+1);
+
+        printf("%s",getIgrejaDadosPre(d4_igreja[i],d20_igreja[i]));
+        fprintf(fp,"%s",getIgrejaDadosPre(d4_igreja[i],d20_igreja[i]));
     }
     printf("---------------------------------------------------------\n");
+    fprintf(fp,"---------------------------------------------------------\n");
 
     for(i=0;i<qtd_lojas;i++){
         printf("\nLoja de numero %d:", i+1);
-        getLojaDadosPre(d4_loja[i],d6_loja[i]);
+        fprintf(fp,"\nLoja de numero %d:", i+1);
+
+        printf("%s",getLojaDadosPre(d4_loja[i],d6_loja[i]));
+        fprintf(fp,"%s",getLojaDadosPre(d4_loja[i],d6_loja[i]));
     }
     printf("---------------------------------------------------------\n");
+    fprintf(fp,"---------------------------------------------------------\n");
 
     for(i=0;i<qtd_bibliotecas;i++){
         printf("\nBiblioteca de numero %d:", i+1);
-        getBibliotecaDadosPre(d4_tamanho_cidade,d100_biblioteca[i]);
+        fprintf(fp,"\nBiblioteca de numero %d:", i+1);
+
+        printf("%s",getBibliotecaDadosPre(d4_tamanho_cidade,d100_biblioteca[i]));
+        fprintf(fp,"%s",getBibliotecaDadosPre(d4_tamanho_cidade,d100_biblioteca[i]));
     }
     printf("---------------------------------------------------------\n");
+    fprintf(fp,"---------------------------------------------------------\n");
 
     pause();
+    fclose(fp);
 }

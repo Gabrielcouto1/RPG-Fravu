@@ -6,6 +6,7 @@
 **/*.jpg
 **/*.zip
 **/*.pdf
+**/*.exe
 
 main
 /Matérias/AOC1/Aulas/Aula 2/ContasClientes/JavaApplication4/nbproject/private/
@@ -47,3 +48,4 @@ main
 /Matérias/POO1/Listas/Lista 5/Main/nbproject/private/
 /Matérias/POO1/Listas/Lista 5/Main/build/
 /Matérias/POO1/Listas/Lista 5/SpaceInvadersLike/nbproject/private/
+Criacao de cidades/gerador-cidades.exe

@@ -1,173 +1,237 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include "Headers/gerar_aleatorio.h"
 #include "Headers/dados.h"
 #include "Headers/funcoes_gerais.h"
 
-void getTamanhoVila(int d4, int *qtd_estruturas){
-    printf("Tamanho da vila: ");
+char* getTamanhoVila(int d4, int *qtd_estruturas){
+    char *out,*temp;
+    out=malloc(255*sizeof(char));
+    temp=malloc(255*sizeof(char));
+    strcpy(out,"\0");
+    strcpy(temp,"\0");
+    
+    strcat(out,"Tamanho da vila: ");
     switch(d4){
         case 1:
-            printf("Abandonada (%d habitantes)\n\n", rand()%11);
+            sprintf(temp,"Abandonada (%d habitantes)\n\n", rand()%11);
+            strcat(out,temp);
+            strcpy(temp,"\0");
             break;
 
         case 2:
-            printf("Pequena (%d habitantes).\n\n", rand()%(451)+50);
+            sprintf(temp,"Pequena (%d habitantes).\n\n", rand()%(451)+50);
+            strcat(out,temp);
+            strcpy(temp,"\0");
             break;
 
         case 3:
-            printf("Media (%d Habitantes)\n\n", rand()%4501+500);
+            sprintf(temp,"Media (%d Habitantes)\n\n", rand()%4501+500);
+            strcat(out,temp);
+            strcpy(temp,"\0");
             break;
 
         case 4:
-            printf("Grande (%d Habitantes).\n\n", rand()%6001+4000);
+            sprintf(temp,"Grande (%d Habitantes).\n\n", rand()%6001+4000);
+            strcat(out,temp);
+            strcpy(temp,"\0");
             break;
     }
-    printf("Tavernas: %d\n",qtd_estruturas[0]);
-    printf("Igrejas: %d\n",qtd_estruturas[1]);
-    printf("Bibliotecas: %d\n",qtd_estruturas[2]);
-    printf("Lojas: %d\n",qtd_estruturas[3]);
-    printf("Ferreiros: %d\n",qtd_estruturas[4] );
-    printf("---------------------------------------------------------\n");
+    sprintf(temp,"Tavernas: %d\n",qtd_estruturas[0]);
+    strcat(out,temp);
+    strcpy(temp,"\0");
+
+    sprintf(temp,"Igrejas: %d\n",qtd_estruturas[1]);
+    strcat(out,temp);
+    strcpy(temp,"\0");
+
+    sprintf(temp,"Bibliotecas: %d\n",qtd_estruturas[2]);
+    strcat(out,temp);
+    strcpy(temp,"\0");
+
+    sprintf(temp,"Lojas: %d\n",qtd_estruturas[3]);
+    strcat(out,temp);
+    strcpy(temp,"\0");
+
+    sprintf(temp,"Ferreiros: %d\n",qtd_estruturas[4] );
+    strcat(out,temp);
+    strcpy(temp,"\0");
+
+    strcat(out,"---------------------------------------------------------\n");
+
+    strcat(out,"\0");
+    return out;
 }
 
-void getFonteEconomia(int d4){
-    printf("\nFonte de economia: ");
+char* getFonteEconomia(int d4){
+    char *out;
+    out=malloc(255*sizeof(char));
+    strcpy(out,"\0");
+
+    strcat(out,"\nFonte de economia: ");
     switch(d4){
         case 1:
-            printf("Fazendas.\n");
+            strcat(out,"Fazendas.\n");
             break;
         case 2:
-            printf("Venda de mercadorias.\n");
+            strcat(out,"Venda de mercadorias.\n");
             break;
         case 3:
-            printf("Viajantes.\n");
+            strcat(out,"Viajantes.\n");
             break;
         case 4:
-            printf("Ensino.\n");
+            strcat(out,"Ensino.\n");
             break;  
     }
-    printf("---------------------------------------------------------\n");
+    strcat(out,"---------------------------------------------------------\n");
+    strcat(out,"\0");
+    return out;
 }
 
-void getCaracteristicaCidade(int d12){
-    printf("\nCaracteristicas da cidade: ");
+char* getCaracteristicaCidade(int d12){
+    char *out;
+    out=malloc(255*sizeof(char));
+    strcpy(out,"\0");
+    
+    strcat(out,"\nCaracteristicas da cidade: ");
 
     switch(d12){
         case 1:
-            printf("Templo imponente.\n");
+            strcat(out,"Templo imponente.\n");
             break;
         case 2:
-            printf("Muitos parques.\n");
+            strcat(out,"Muitos parques.\n");
             break;
         case 3:
-            printf("Sede de uma familia muito rica.\n");
+            strcat(out,"Sede de uma familia muito rica.\n");
             break;
         case 4:
-            printf("Cheiro horrivel.\n");
+            strcat(out,"Cheiro horrivel.\n");
             break;
         case 5:
-            printf("Local de muitas batalhas.\n");
+            strcat(out,"Local de muitas batalhas.\n");
             break;
         case 6:
-            printf("Local onde passa muitos viajantes.\n");
+            strcat(out,"Local onde passa muitos viajantes.\n");
             break;
         case 7:
-            printf("Local de evento tragico.\n");
+            strcat(out,"Local de evento tragico.\n");
             break;
         case 8:
-            printf("Reputacao estranha.\n");
+            strcat(out,"Reputacao estranha.\n");
             break;
         case 9:
-            printf("Grande biblioteca.\n");
+            strcat(out,"Grande biblioteca.\n");
             break;
         case 10:
-            printf("Construida em cima de ruinas.\n");
+            strcat(out,"Construida em cima de ruinas.\n");
             break;
         case 11:
-            printf("Local de uma grantde tumba.\n");
+            strcat(out,"Local de uma grantde tumba.\n");
             break;
         case 12:
-            printf("Conhecida por eventos magicos.\n");
+            strcat(out,"Conhecida por eventos magicos.\n");
             break;
     }
-    printf("---------------------------------------------------------\n");
+    strcat(out,"---------------------------------------------------------\n");
+    strcat(out,"\0");
+    return out;
 }
 
-void getGuildas(){
+char* getGuildas(){
     int i;
     int qtd=rollD4()-1;
+    char *out,*temp;
+    out=malloc(255*sizeof(char));
+    temp=malloc(255*sizeof(char));
+    strcpy(out,"\0");
+    strcpy(temp,"\0");
 
     if(qtd==0)
-        return;
+        return "\0";
     
     for(i=0;i<qtd;i++){
-        printf("\nGuilda numero %d\n",i+1);
-        printf("Guilda de ");
+        sprintf(temp,"\nGuilda numero %d\n",i+1);
+        strcat(out,temp);
+        strcpy(temp,"\0");
+
+        strcat(out,"Guilda de ");
 
         switch(rollD20()){
             case 1:
             case 2:
-                printf("Ladroes.\n");
+                strcat(out,"Ladroes.\n");
                 break;
             case 3:
             case 4:
             case 5:
-                printf("Guerreiros.\n");
+                strcat(out,"Guerreiros.\n");
                 break;
             case 6:
             case 7:
-                printf("Sociedade Arcana.\n");
+                strcat(out,"Sociedade Arcana.\n");
                 break;
             case 8:
             case 9:
             case 10:
             case 11:
-                printf("Mercadores.\n");
+                strcat(out,"Mercadores.\n");
                 break;
             case 12:
             case 13:
-                printf("Burgueses.\n");
+                strcat(out,"Burgueses.\n");
                 break;
             case 14:
             case 15:
             case 16:
-                printf("Artesoes.\n");
+                strcat(out,"Artesoes.\n");
                 break;
             case 17:
             case 18:
             case 19:
-                printf("Revolucionarios.\n");
+                strcat(out,"Revolucionarios.\n");
                 break;
             case 20:
-                printf("Assassinos.\n");
+                strcat(out,"Assassinos.\n");
                 break;
         }
     }
+    strcat(out,"\0");
+    return out;
 }
 
-void getTaverna(int qtd){
+char* getTaverna(int qtd){
     int i;
+    char *out,*temp;
+    out=malloc(255*sizeof(char));
+    temp=malloc(255*sizeof(char));
+    strcpy(out,"\0");
+    strcpy(temp,"\0");
+
     for(i=0;i<qtd;i++){
-        printf("\nTaverna numero %d\n", i+1);
-        printf("Nome: ");
+        sprintf(temp,"\nTaverna numero %d\n", i+1);
+        strcat(out,temp);
+        strcpy(temp,"\0");
+
+        strcat(out,"Nome: ");
         getNomeTaverna();
-        printf("Tamanho: ");
+        strcat(out,"Tamanho: ");
         switch(rollD4()){
             case 1:
-                printf("Minuscula.\t");
+                strcat(out,"Minuscula.\t");
                 break;
             case 2:
-                printf("Pequena.\t");
+                strcat(out,"Pequena.\t");
                 break;
             case 3:
-                printf("Media.\t");
+                strcat(out,"Media.\t");
                 break;
             case 4:
-                printf("Grande.\t");
+                strcat(out,"Grande.\t");
                 break;
         }
-        printf("\nCaracteristica: ");
+        strcat(out,"\nCaracteristica: ");
 
         switch(rollD20()){
             case 1:
@@ -175,145 +239,161 @@ void getTaverna(int qtd){
             case 3:
             case 4:
             case 5:
-                printf("Quieta e discreta.\n");
+                strcat(out,"Quieta e discreta.\n");
                 break;
             case 6:
             case 7:
             case 8:
             case 9:
             case 10:
-                printf("Barulhenta.\n");
+                strcat(out,"Barulhenta.\n");
                 break;
             case 11:
             case 12:
             case 13:
             case 14:
-                printf("Frequentada por guilda.\n");
+                strcat(out,"Frequentada por guilda.\n");
                 break;
             case 15:
-                printf("Local de encontro secreto.\n");
+                strcat(out,"Local de encontro secreto.\n");
                 break;
             case 16:
-                printf("Bordel.\n");
+                strcat(out,"Bordel.\n");
                 break;
             case 17:
             case 18:
-                printf("Local de briga.\n");
+                strcat(out,"Local de briga.\n");
                 break;
             case 19:
-                printf("Local de trafico.\n");
+                strcat(out,"Local de trafico.\n");
                 break;
             case 20:
-                printf("Clube gastronomico.\n");
+                strcat(out,"Clube gastronomico.\n");
                 break;
         }
     }
-    printf("---------------------------------------------------------\n");
+    strcat(out,"---------------------------------------------------------\n");
+    strcat(out,"\0");
+    return out;
 }
 
-void getNomeTaverna(){
+char* getNomeTaverna(){
+    char *out;
+    out=malloc(255*sizeof(char));
+    strcpy(out,"\0");
+
     switch(rollD12()){
         case 1:
-            printf("A Enguia ");
+            strcat(out,"A Enguia ");
             break;
         case 2:
-            printf("O Golfinho ");
+            strcat(out,"O Golfinho ");
             break;
         case 3:
-            printf("O Anao ");
+            strcat(out,"O Anao ");
             break;
         case 4:
-            printf("O Ponei ");
+            strcat(out,"O Ponei ");
             break;
         case 5:
-            printf("O Lobo ");
+            strcat(out,"O Lobo ");
             break;
         case 6:
-            printf("O Espirito ");
+            strcat(out,"O Espirito ");
             break;
         case 7:
-            printf("O Cordeiro ");
+            strcat(out,"O Cordeiro ");
             break;
         case 8:
-            printf("A Montanha ");
+            strcat(out,"A Montanha ");
             break;
         case 9:
-            printf("O Satiro ");
+            strcat(out,"O Satiro ");
             break;
         case 10:
-            printf("A Aranha ");
+            strcat(out,"A Aranha ");
             break;
         case 11:
-            printf("A Estrela ");
+            strcat(out,"A Estrela ");
             break;
         case 12:
-            printf("O Jovem ");
+            strcat(out,"O Jovem ");
             break;
     }
 
     switch(rollD12()){
         case 1:
-            printf("Prateado(a)\n");
+            strcat(out,"Prateado(a)\n");
             break;
         case 2:
-            printf("Dourado(a)\n");
+            strcat(out,"Dourado(a)\n");
             break;
         case 3:
-            printf("Sorridente\n");
+            strcat(out,"Sorridente\n");
             break;
         case 4:
-            printf("Atraente\n");
+            strcat(out,"Atraente\n");
             break;
         case 5:
-            printf("Solitario(a)\n");
+            strcat(out,"Solitario(a)\n");
             break;
         case 6:
-            printf("Bebado(a)\n");
+            strcat(out,"Bebado(a)\n");
             break;
         case 7:
-            printf("Errante\n");
+            strcat(out,"Errante\n");
             break;
         case 8:
-            printf("Misterioso(a)\n");
+            strcat(out,"Misterioso(a)\n");
             break;
         case 9:
-            printf("Negro(a)\n");
+            strcat(out,"Negro(a)\n");
             break;
         case 10:
-            printf("Reluzente\n");
+            strcat(out,"Reluzente\n");
             break;
         case 11:
-            printf("Cambaleante\n");
+            strcat(out,"Cambaleante\n");
             break;
         case 12:
-            printf("Empinado(a)\n");
+            strcat(out,"Empinado(a)\n");
             break;
     }
+    strcat(out,"\0");
+    return out;
 }
 
-void getIgreja(int qtd){
+char* getIgreja(int qtd){
     int i;
+    char *out,*temp;
+    out=malloc(255*sizeof(char));
+    temp=malloc(255*sizeof(char));
+    strcpy(out,"\0");
+    strcpy(temp,"\0");
 
     for(i=0;i<qtd;i++){
-        printf("\nIgreja numero %d: ",i+1);
-        printf("\nTamanho: ");
+        sprintf(temp,"\nIgreja numero %d: ",i+1);
+        strcat(out,temp);
+        strcpy(temp,"\0");
+
+        strcat(out,"\nTamanho: ");
 
         switch(rollD4()){
         case 1:
-            printf("Minuscula\n");
+            strcat(out,"Minuscula\n");
             break;
         case 2:
-            printf("Pequena\n");
+            strcat(out,"Pequena\n");
             break;
         case 3:
-            printf("Media\n");
+            strcat(out,"Media\n");
             break;
         case 4:
-            printf("Grande\n");
+            strcat(out,"Grande\n");
             break;
         }
 
-        printf("Tipo: ");
+        strcat(out,"Tipo: ");
         switch(rollD20()){
             case 1:
             case 2:
@@ -325,124 +405,147 @@ void getIgreja(int qtd){
             case 8:
             case 9:
             case 10:
-                printf("Templo Neutro ou bom.\n");
+                strcat(out,"Templo Neutro ou bom.\n");
                 break;
             case 11:
             case 12:
-                printf("Templo de charlatoes.\n");
+                strcat(out,"Templo de charlatoes.\n");
                 break;
             case 13:
             case 14:
-                printf("Santuario abandonado.\n");
+                strcat(out,"Santuario abandonado.\n");
                 break;
             case 15:
                 
             case 16:
             case 17:
-                printf("Biblioteca dedicada a estudos religiosos.\n");
+                strcat(out,"Biblioteca dedicada a estudos religiosos.\n");
                 break;
             case 18:
             case 19:
-                printf("Divindade antiga ou esquecida.\n");
+                strcat(out,"Divindade antiga ou esquecida.\n");
                 break;
             case 20:
-                printf("Santuario escondido dedicado a um corruptor ou divindade maligna.\n");
+                strcat(out,"Santuario escondido dedicado a um corruptor ou divindade maligna.\n");
                 break;
         }
     }
-    printf("---------------------------------------------------------\n");
+    strcat(out,"---------------------------------------------------------\n");
+    strcat(out,"\0");
+    return out;
 }
 
-void getLoja(int qtd){
+char* getLoja(int qtd){
     int i;
+    char *out,*temp;
+    out=malloc(255*sizeof(char));
+    temp=malloc(255*sizeof(char));
+    strcpy(out,"\0");
+    strcpy(temp,"\0");
 
     for(i=0;i<qtd;i++){
-        printf("\nLoja numero %d: ",i+1);
-        printf("\nTamanho: ");
+        sprintf(temp,"\nLoja numero %d: ",i+1);
+        strcat(out,temp);
+        strcpy(temp,"\0");
+
+        strcat(out,"\nTamanho: ");
         switch(rollD4()){
             case 1:
-                printf("Minuscula.\nChance de itens: (incomum 20%%)\n");
+                strcat(out,"Minuscula.\nChance de itens: (incomum 20%%)\n");
                 break;
             case 2:
-                printf("Pequena.\nChance de itens: (incomum 60%%, raro 20%%)\n");
+                strcat(out,"Pequena.\nChance de itens: (incomum 60%%, raro 20%%)\n");
                 break;
             case 3:
-                printf("Media.\nChance de itens: (incomum 80%%, raro 60%%, muito raro 20%%)\n");
+                strcat(out,"Media.\nChance de itens: (incomum 80%%, raro 60%%, muito raro 20%%)\n");
                 break;
             case 4:
-                printf("Grande.\nChance de itens: (raro 80%%, muito raro 60%%)\n");
+                strcat(out,"Grande.\nChance de itens: (raro 80%%, muito raro 60%%)\n");
                 break;
         }
         
-        printf("Tipo de loja: ");
+        strcat(out,"Tipo de loja: ");
         switch(rollD6()){
             case 1:
-                printf("Pocoes e venenos.\n");
+                strcat(out,"Pocoes e venenos.\n");
                 break;
             case 2:
-                printf("Equipamentos.\n");
+                strcat(out,"Equipamentos.\n");
                 break;
             case 3:
-                printf("Focos arcanos e pergaminhos.\n");
+                strcat(out,"Focos arcanos e pergaminhos.\n");
                 break;
             case 4:
-                printf("Armas e escudos.\n");
+                strcat(out,"Armas e escudos.\n");
                 break;
             case 5:
-                printf("Itens Maravilhosos.\n");
+                strcat(out,"Itens Maravilhosos.\n");
                 break;
             case 6:
-                printf("Qualquer outro tipo de item mas muito barato. (Comumente amaldicoado)\n");
+                strcat(out,"Qualquer outro tipo de item mas muito barato. (Comumente amaldicoado)\n");
                 break;
         }
     }
+    strcat(out,"\0");
+    return out;
 }
 
-void getBiblioteca(int qtd, int tamanho_cidade){
+char* getBiblioteca(int qtd, int tamanho_cidade){
     int i;
     int d100;
+    char *out,*temp;
+    out=malloc(255*sizeof(char));
+    temp=malloc(255*sizeof(char));
+    strcpy(out,"\0");
+    strcpy(temp,"\0");
+
     for(i=0;i<qtd;i++){
         d100=rollD100();
-        printf("\nBiblioteca de numero %d\n", i+1);
-        printf("Tamanho: ");
+        sprintf(temp,"\nBiblioteca de numero %d\n", i+1);
+        strcat(out,temp);
+        strcpy(temp,"\0");
+
+        strcat(out,"Tamanho: ");
         switch(tamanho_cidade){
             case 1:
-                printf("Media.\nModificador: 0\n");
+                strcat(out,"Media.\nModificador: 0\n");
                 break;
             case 2:
                 if(d100>=1&&d100<=75)
-                    printf("Pequena.\nModificador: -5\n");
+                    strcat(out,"Pequena.\nModificador: -5\n");
                 else if(d100>75&&d100<=89)
-                    printf("Media.\nModificador: 0\n");
+                    strcat(out,"Media.\nModificador: 0\n");
                 else if(d100>89&&d100<=95)
-                    printf("Grande.\nModificador: +2\n");
+                    strcat(out,"Grande.\nModificador: +2\n");
                 else if(d100>95&&d100<=100)
-                    printf("Colossal.\nModificador: +5\n");
+                    strcat(out,"Colossal.\nModificador: +5\n");
                 break;
 
             case 3:
                 if(d100>=1&&d100<=50)
-                    printf("Pequena.\nModificador: -5\n");
+                    strcat(out,"Pequena.\nModificador: -5\n");
                 else if(d100>50&&d100<=75)
-                    printf("Media.\nModificador: 0\n");
+                    strcat(out,"Media.\nModificador: 0\n");
                 else if(d100>75&&d100<=90)
-                    printf("Grande.\nModificador: +2\n");
+                    strcat(out,"Grande.\nModificador: +2\n");
                 else if(d100>90&&d100<=100)
-                    printf("Colossal.\nModificador: +5\n");
+                    strcat(out,"Colossal.\nModificador: +5\n");
                 break;
 
             case 4:
                 if(d100>=1&&d100<=25)
-                    printf("Pequena.\nModificador: -5\n");
+                    strcat(out,"Pequena.\nModificador: -5\n");
                 else if(d100>25&&d100<=20)
-                    printf("Media.\nModificador: 0\n");
+                    strcat(out,"Media.\nModificador: 0\n");
                 else if(d100>20&&d100<=80)
-                    printf("Grande.\nModificador: +2\n");
+                    strcat(out,"Grande.\nModificador: +2\n");
                 else if(d100>80&&d100<=100)
-                    printf("Colossal.\nModificador: +5\n");
+                    strcat(out,"Colossal.\nModificador: +5\n");
                 break;
         }
     }
+    strcat(out,"\0");
+    return out;
 }
 
 void geraCidadeRandom(){
@@ -460,23 +563,57 @@ void geraCidadeRandom(){
         printf("Vila %d\n",i+1);
         printf("---------------------------------------------------------\n");
         d4=rollD4();
-
+    
         qtd_estruturas=qtdEstruturas(d4);
         qtd_taverna=qtd_estruturas[0];
         qtd_igrejas=qtd_estruturas[1];
         qtd_bibliotecas=qtd_estruturas[2];
         qtd_lojas=qtd_estruturas[3];
 
-        getTamanhoVila(d4, qtd_estruturas);
-        getFonteEconomia(rollD4());
-        getCaracteristicaCidade(rollD12());
-        getGuildas(rollD20());
-        printf("---------------------------------------------------------\n");
-        getTaverna(qtd_taverna);
-        getIgreja(qtd_igrejas);
-        getLoja(qtd_lojas);
-        printf("---------------------------------------------------------\n");
-        getBiblioteca(qtd_bibliotecas, d4);
+        printRandom(i,getTamanhoVila(d4, qtd_estruturas),getFonteEconomia(rollD4()),
+        getCaracteristicaCidade(rollD12()),getGuildas(rollD20()),getTaverna(qtd_taverna),
+        getIgreja(qtd_igrejas),getLoja(qtd_lojas),getBiblioteca(qtd_bibliotecas, d4));
+
         pause();
     }  
+}
+
+void printRandom(int cont, char* tam_vila, char* economia, char* caracteristica, char* guilda,
+char* taverna, char* igreja,char* loja, char* biblioteca){
+    char nome[255];
+    sprintf(nome,"Cidade_Aleatoria%d.txt",cont+1);
+    FILE *fp;
+    printf("\n%s\n",nome);
+    fp=fopen(nome,"w+");
+
+    if(fp==NULL)
+        return;
+    printf("Vila %d\n", cont+1);
+    printf("---------------------------------------------------------\n");
+    printf("%s",tam_vila);
+    printf("%s",economia);
+    printf("%s",caracteristica);
+    printf("%s",guilda);
+    printf("---------------------------------------------------------\n");
+    printf("%s",taverna);
+    printf("%s",igreja);
+    printf("%s",loja);
+    printf("---------------------------------------------------------\n");
+    printf("%s",biblioteca);
+
+    fprintf(fp,"---------------------------------------------------------\n");
+    fprintf(fp,"Vila %d\n", cont+1);
+    fprintf(fp,"---------------------------------------------------------\n");
+    fprintf(fp,"%s",tam_vila);
+    fprintf(fp,"%s",economia);
+    fprintf(fp,"%s",caracteristica);
+    fprintf(fp,"%s",guilda);
+    fprintf(fp,"---------------------------------------------------------\n");
+    fprintf(fp,"%s",taverna);
+    fprintf(fp,"%s",igreja);
+    fprintf(fp,"%s",loja);
+    fprintf(fp,"---------------------------------------------------------\n");
+    fprintf(fp,"%s",biblioteca);
+
+    fclose(fp);
 }
