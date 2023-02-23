@@ -548,7 +548,7 @@ char* getBiblioteca(int qtd, int tamanho_cidade){
     return out;
 }
 
-void geraCidadeRandom(){
+int geraCidadeRandom(int total){
     int i, qtd_taverna, qtd_cidades, *qtd_estruturas, d4, qtd_igrejas, qtd_bibliotecas, qtd_lojas;
 
     printf("\nQuantas cidades deseja gerar?: ");
@@ -556,7 +556,7 @@ void geraCidadeRandom(){
     getchar();
     if(qtd_cidades<=0){
         printf("Insira valores positivos maiores que 0.\n");
-        return;
+        return total;
     }
     int op;
     printf("\n[1]- Imprimir cidades apenas na tela;");
@@ -575,18 +575,20 @@ void geraCidadeRandom(){
         qtd_bibliotecas=qtd_estruturas[2];
         qtd_lojas=qtd_estruturas[3];
 
-        printRandom(i,op,getTamanhoVila(d4, qtd_estruturas),getFonteEconomia(rollD4()),
+        printRandom(total,op,getTamanhoVila(d4, qtd_estruturas),getFonteEconomia(rollD4()),
         getCaracteristicaCidade(rollD12()),getGuildas(rollD20()),getTaverna(qtd_taverna),
         getIgreja(qtd_igrejas),getLoja(qtd_lojas),getBiblioteca(qtd_bibliotecas, d4));
+        total++;
 
         pause();
-    }  
+    }
+    return total;
 }
 
 void printRandom(int cont, int op, char* tam_vila, char* economia, char* caracteristica, char* guilda,
 char* taverna, char* igreja,char* loja, char* biblioteca){
     char nome[255];
-    sprintf(nome,"Cidade_Aleatoria%d.txt\0",cont+1);
+    sprintf(nome,"Cidade_Aleatoria%d.txt\0",cont);
 
     if(op==2){
         FILE *fp;
@@ -596,7 +598,7 @@ char* taverna, char* igreja,char* loja, char* biblioteca){
             
         printf("Nome do arquivo: %s\n",nome);
         fprintf(fp,"---------------------------------------------------------\n");
-        fprintf(fp,"Vila %d\n", cont+1);
+        fprintf(fp,"Vila %d\n", cont);
         fprintf(fp,"---------------------------------------------------------\n");
         fprintf(fp,"%s",tam_vila);
         fprintf(fp,"%s",economia);
@@ -611,7 +613,7 @@ char* taverna, char* igreja,char* loja, char* biblioteca){
         fclose(fp);
     }
 
-    printf("Vila %d\n", cont+1);
+    printf("Vila %d\n", cont);
     printf("---------------------------------------------------------\n");
     printf("%s",tam_vila);
     printf("%s",economia);

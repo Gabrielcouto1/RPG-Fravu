@@ -8,9 +8,10 @@
 
 int main(){
     srand(time(NULL));
-    int  op, cont=1, print;
+    int  op, cont=1,total=1;
     system("mkdir CidadesAleatorias");
-    system("cls");
+    system(clean);
+
     while(1){
         printf("\n----------------- Menu----------------- \n");
         printf("[1]Gerar cidades aleatoriamente;\n");
@@ -26,7 +27,7 @@ int main(){
 
         switch(op){
             case 1:
-                geraCidadeRandom();
+                total=geraCidadeRandom(total);
                 break;
 
             case 2:
