@@ -553,15 +553,20 @@ void geraCidadeRandom(){
 
     printf("\nQuantas cidades deseja gerar?: ");
     scanf("%d",&qtd_cidades);
+    getchar();
     if(qtd_cidades<=0){
         printf("Insira valores positivos maiores que 0.\n");
         return;
     }
+    int op;
+    printf("\n[1]- Imprimir cidades apenas na tela;");
+    printf("\n[2]- Imprimir na tela e no arquivo.");
+    printf("\nInsira a opcao: ");
+    scanf("%d",&op);
+    getchar();
     pause();
-    
+
     for(i=0;i<qtd_cidades;i++){
-        printf("Vila %d\n",i+1);
-        printf("---------------------------------------------------------\n");
         d4=rollD4();
     
         qtd_estruturas=qtdEstruturas(d4);
@@ -570,7 +575,7 @@ void geraCidadeRandom(){
         qtd_bibliotecas=qtd_estruturas[2];
         qtd_lojas=qtd_estruturas[3];
 
-        printRandom(i,getTamanhoVila(d4, qtd_estruturas),getFonteEconomia(rollD4()),
+        printRandom(i,op,getTamanhoVila(d4, qtd_estruturas),getFonteEconomia(rollD4()),
         getCaracteristicaCidade(rollD12()),getGuildas(rollD20()),getTaverna(qtd_taverna),
         getIgreja(qtd_igrejas),getLoja(qtd_lojas),getBiblioteca(qtd_bibliotecas, d4));
 
@@ -578,16 +583,34 @@ void geraCidadeRandom(){
     }  
 }
 
-void printRandom(int cont, char* tam_vila, char* economia, char* caracteristica, char* guilda,
+void printRandom(int cont, int op, char* tam_vila, char* economia, char* caracteristica, char* guilda,
 char* taverna, char* igreja,char* loja, char* biblioteca){
     char nome[255];
-    sprintf(nome,"Cidade_Aleatoria%d.txt",cont+1);
-    FILE *fp;
-    printf("\n%s\n",nome);
-    fp=fopen(nome,"w+");
+    sprintf(nome,"Cidade_Aleatoria%d.txt\0",cont+1);
 
-    if(fp==NULL)
-        return;
+    if(op==2){
+        FILE *fp;
+        fp=fopen(nome,"w+");
+        if(fp==NULL)
+            return;
+            
+        printf("Nome do arquivo: %s\n",nome);
+        fprintf(fp,"---------------------------------------------------------\n");
+        fprintf(fp,"Vila %d\n", cont+1);
+        fprintf(fp,"---------------------------------------------------------\n");
+        fprintf(fp,"%s",tam_vila);
+        fprintf(fp,"%s",economia);
+        fprintf(fp,"%s",caracteristica);
+        fprintf(fp,"%s",guilda);
+        fprintf(fp,"---------------------------------------------------------\n");
+        fprintf(fp,"%s",taverna);
+        fprintf(fp,"%s",igreja);
+        fprintf(fp,"%s",loja);
+        fprintf(fp,"---------------------------------------------------------\n");
+        fprintf(fp,"%s",biblioteca);
+        fclose(fp);
+    }
+
     printf("Vila %d\n", cont+1);
     printf("---------------------------------------------------------\n");
     printf("%s",tam_vila);
@@ -600,20 +623,4 @@ char* taverna, char* igreja,char* loja, char* biblioteca){
     printf("%s",loja);
     printf("---------------------------------------------------------\n");
     printf("%s",biblioteca);
-
-    fprintf(fp,"---------------------------------------------------------\n");
-    fprintf(fp,"Vila %d\n", cont+1);
-    fprintf(fp,"---------------------------------------------------------\n");
-    fprintf(fp,"%s",tam_vila);
-    fprintf(fp,"%s",economia);
-    fprintf(fp,"%s",caracteristica);
-    fprintf(fp,"%s",guilda);
-    fprintf(fp,"---------------------------------------------------------\n");
-    fprintf(fp,"%s",taverna);
-    fprintf(fp,"%s",igreja);
-    fprintf(fp,"%s",loja);
-    fprintf(fp,"---------------------------------------------------------\n");
-    fprintf(fp,"%s",biblioteca);
-
-    fclose(fp);
 }

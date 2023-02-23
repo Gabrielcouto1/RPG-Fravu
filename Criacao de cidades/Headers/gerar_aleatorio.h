@@ -11,7 +11,7 @@ char* getIgreja(int qtd);
 char* getLoja(int qtd);
 char* getBiblioteca(int qtd, int tamanho_cidade);
 void geraCidadeRandom();
-void printRandom(int cont, char* tam_vila, char* economia, char* caracteristica, char* guilda, 
+void printRandom(int cont,int op, char* tam_vila, char* economia, char* caracteristica, char* guilda, 
 char* taverna, char* igreja,char* loja, char* biblioteca);
 
 #endif

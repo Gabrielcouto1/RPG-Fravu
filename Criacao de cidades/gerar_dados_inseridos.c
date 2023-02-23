@@ -294,8 +294,8 @@ char* getBibliotecaDadosPre(int tamanho_cidade, int d100){
     return out;
 }
 
-void geraCidadeDadosPre(){
-    int i, d4_tamanho_cidade, d4_economia, d12_caracteristica;
+void geraCidadeDadosPre(int cont){
+    int i, d4_tamanho_cidade, d4_economia, d12_caracteristica, op;
     int *d20_guildas, *d4_taverna, *d20_taverna, *d4_igreja, *d20_igreja, *d4_loja, *d6_loja, *d100_biblioteca;
     int *qtd_estruturas, qtd_taverna, qtd_igrejas, qtd_lojas, qtd_bibliotecas, qtd_guildas;
 
@@ -375,6 +375,7 @@ void geraCidadeDadosPre(){
 
         printf("\nInsira o D20 rolado para caracteristica da taverna %d: ", i+1);
         scanf("%d", &d20_taverna[i]);
+        getchar();
 
         if(d20_taverna[i]<=0||d20_taverna[i]>20){
             printf("\nErro de dado.\n");
@@ -399,6 +400,7 @@ void geraCidadeDadosPre(){
 
         printf("\nInsira o D20 rolado para caracteristica da igreja numero %d: ", i+1);
         scanf("%d", &d20_igreja[i]);
+        getchar();
 
         if(d20_igreja[i]<=0||d20_igreja[i]>20){
             printf("\nErro de dado.\n");
@@ -421,8 +423,9 @@ void geraCidadeDadosPre(){
 
         }
 
-        printf("\nInsira o D20 rolado para caracteristica da loja numero %d: ", i+1);
+        printf("\nInsira o D6 rolado para caracteristica da loja numero %d: ", i+1);
         scanf("%d", &d6_loja[i]);
+        getchar();
 
         if(d6_loja[i]<=0||d6_loja[i]>6){
             printf("\nErro de dado.\n");
@@ -445,73 +448,90 @@ void geraCidadeDadosPre(){
         }
         printf("\n");
     }
+    char nome[255], tamanho_temp[255];
+    sprintf(nome,"Cidade_Pre_Rolada%d.txt",cont);
+    strcpy(tamanho_temp,getTamanhoVila(d4_tamanho_cidade, qtd_estruturas));
 
-    pause();
-    pause();
+    printf("\n[1]- Imprimir cidade apenas na tela;");
+    printf("\n[2]- Imprimir na tela e no arquivo chamado \"%s\".",nome);
+    printf("\nInsira a opcao: ");
+    scanf("%d",&op);
+    getchar();
     pause();
     
-    FILE *fp;
-    fp=fopen("Cidade_Dados_Pre_Rolados.txt","w+");
+    if(op==2){
+        FILE *fp;
+        fp=fopen(nome,"w+");
 
-    printf("%s",getTamanhoVila(d4_tamanho_cidade, qtd_estruturas));
-    fprintf(fp,"%s",getTamanhoVila(d4_tamanho_cidade, qtd_estruturas));
+        fprintf(fp,"%s",tamanho_temp);
+        fprintf(fp,"%s",getFonteEconomia(d4_economia));
+        fprintf(fp,"%s",getCaracteristicaCidade(d12_caracteristica));
 
+        for(i=0;i<qtd_guildas;i++){
+            fprintf(fp,"\nGuilda de numero %d: Guilda de ", i+1);
+            fprintf(fp,"%s",getGuildasDadosPre(d20_guildas[i]));
+        }
+        fprintf(fp,"---------------------------------------------------------\n");
+
+        for(i=0;i<qtd_taverna;i++){
+            fprintf(fp,"\nTaverna de numero %d:", i+1);
+            fprintf(fp,"%s",getTavernaDadosPre(d4_taverna[i], d20_taverna[i]));
+        }
+        fprintf(fp,"---------------------------------------------------------\n");
+
+        for(i=0;i<qtd_igrejas;i++){
+            fprintf(fp,"\nIgreja de numero %d:", i+1);
+            fprintf(fp,"%s",getIgrejaDadosPre(d4_igreja[i],d20_igreja[i]));
+        }
+        fprintf(fp,"---------------------------------------------------------\n");
+
+        for(i=0;i<qtd_lojas;i++){
+            fprintf(fp,"\nLoja de numero %d:", i+1);
+            fprintf(fp,"%s",getLojaDadosPre(d4_loja[i],d6_loja[i]));
+        }
+        fprintf(fp,"---------------------------------------------------------\n");
+
+        for(i=0;i<qtd_bibliotecas;i++){
+            fprintf(fp,"\nBiblioteca de numero %d:", i+1);
+            fprintf(fp,"%s",getBibliotecaDadosPre(d4_tamanho_cidade,d100_biblioteca[i]));
+        }
+        fprintf(fp,"---------------------------------------------------------\n");
+        fclose(fp);
+    }
+
+    printf("%s",tamanho_temp);
     printf("%s",getFonteEconomia(d4_economia));
-    fprintf(fp,"%s",getFonteEconomia(d4_economia));
-
     printf("%s",getCaracteristicaCidade(d12_caracteristica));
-    fprintf(fp,"%s",getCaracteristicaCidade(d12_caracteristica));
     
     for(i=0;i<qtd_guildas;i++){
         printf("\nGuilda de numero %d: Guilda de ", i+1);
-        fprintf(fp,"\nGuilda de numero %d: Guilda de ", i+1);
-
         printf("%s",getGuildasDadosPre(d20_guildas[i]));
-        fprintf(fp,"%s",getGuildasDadosPre(d20_guildas[i]));
     }
     printf("---------------------------------------------------------\n");
-    fprintf(fp,"---------------------------------------------------------\n");
 
     for(i=0;i<qtd_taverna;i++){
         printf("\nTaverna de numero %d:", i+1);
-        fprintf(fp,"\nTaverna de numero %d:", i+1);
-
         printf("%s",getTavernaDadosPre(d4_taverna[i], d20_taverna[i]));
-        fprintf(fp,"%s",getTavernaDadosPre(d4_taverna[i], d20_taverna[i]));
     }
     printf("---------------------------------------------------------\n");
-    fprintf(fp,"---------------------------------------------------------\n");
 
     for(i=0;i<qtd_igrejas;i++){
         printf("\nIgreja de numero %d:", i+1);
-        fprintf(fp,"\nIgreja de numero %d:", i+1);
-
         printf("%s",getIgrejaDadosPre(d4_igreja[i],d20_igreja[i]));
-        fprintf(fp,"%s",getIgrejaDadosPre(d4_igreja[i],d20_igreja[i]));
     }
     printf("---------------------------------------------------------\n");
-    fprintf(fp,"---------------------------------------------------------\n");
 
     for(i=0;i<qtd_lojas;i++){
         printf("\nLoja de numero %d:", i+1);
-        fprintf(fp,"\nLoja de numero %d:", i+1);
-
         printf("%s",getLojaDadosPre(d4_loja[i],d6_loja[i]));
-        fprintf(fp,"%s",getLojaDadosPre(d4_loja[i],d6_loja[i]));
     }
     printf("---------------------------------------------------------\n");
-    fprintf(fp,"---------------------------------------------------------\n");
 
     for(i=0;i<qtd_bibliotecas;i++){
         printf("\nBiblioteca de numero %d:", i+1);
-        fprintf(fp,"\nBiblioteca de numero %d:", i+1);
-
         printf("%s",getBibliotecaDadosPre(d4_tamanho_cidade,d100_biblioteca[i]));
-        fprintf(fp,"%s",getBibliotecaDadosPre(d4_tamanho_cidade,d100_biblioteca[i]));
     }
     printf("---------------------------------------------------------\n");
-    fprintf(fp,"---------------------------------------------------------\n");
 
     pause();
-    fclose(fp);
 }

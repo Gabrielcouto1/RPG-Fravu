@@ -8,7 +8,7 @@
 
 int main(){
     srand(time(NULL));
-    int  op;
+    int  op, cont=1, print;
     system("mkdir CidadesAleatorias");
     system("cls");
     while(1){
@@ -30,7 +30,8 @@ int main(){
                 break;
 
             case 2:
-                geraCidadeDadosPre();
+                geraCidadeDadosPre(cont);
+                cont++;
                 break;
 
             default:
